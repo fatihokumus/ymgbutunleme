@@ -19,7 +19,7 @@
       event.preventDefault();
       const firstName = document.getElementById('firstName').value;
       const lastName = document.getElementById('lastName').value;
-      const response = await fetch('/predict', {
+      const response = await fetch('http://localhost:5000/predict', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -27,7 +27,7 @@
         body: JSON.stringify({ firstName, lastName })
       });
       const data = await response.json();
-      document.getElementById('result').innerText = `Predicted Origin: ${data.origin}`;
+      document.getElementById('result').innerText = `Tahmin Edilen Ülke: ${data.origin}`;
     });
   </script>
 </body>
