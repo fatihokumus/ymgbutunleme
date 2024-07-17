@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Name Origin Prediction</title>
+</head>
+<body>
+  <h1>Name Origin Prediction</h1>
+  <form id="nameForm">
+    <label for="firstName">First Name:</label>
+    <input type="text" id="firstName" name="firstName" required><br><br>
+    <label for="lastName">Last Name:</label>
+    <input type="text" id="lastName" name="lastName" required><br><br>
+    <button type="submit">Predict Origin</button>
+  </form>
+  <div id="result"></div>
+
+  <script>
+    document.getElementById('nameForm').addEventListener('submit', async function(event) {
+      event.preventDefault();
+      const firstName = document.getElementById('firstName').value;
+      const lastName = document.getElementById('lastName').value;
+      const response = await fetch('/predict', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ firstName, lastName })
+      });
+      const data = await response.json();
+      document.getElementById('result').innerText = `Predicted Origin: ${data.origin}`;
+    });
+  </script>
+</body>
+</html>
